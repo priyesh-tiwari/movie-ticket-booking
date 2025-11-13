@@ -1,49 +1,86 @@
-require("dotenv").config();
+// Import dependencies
 const express = require("express");
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const cors = require("cors");
+const Stripe = require("stripe");
+require("dotenv").config();
 
+// Initialize Express app and middleware
 const app = express();
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
-// ✅ Test route to check server connectivity
-app.get("/", (req, res) => {
-  res.send("Backend is running!");
-});
+// Initialize Stripe with your secret key
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
-// 🔵 Create PaymentIntent
+// ✅ Payment Intent Route
 app.post("/create-payment-intent", async (req, res) => {
   try {
-    const { amount, currency, userId, movieId, theaterId, showtimeId, selectedSeats } = req.body;
+    const {
+      amount,
+      currency,
+      userId,
+      movieId,
+      theaterId,
+      showtimeId,
+      selectedSeats,
+      metadata,
+    } = req.body;
 
-    if (!amount || !currency) {
-      return res.status(400).json({ error: "Amount and currency are required" });
+    if (!amount || amount <= 0) {
+      return res
+        .status(400)
+        .json({ error: "Invalid amount. Must be greater than 0." });
     }
 
-    const paymentAmount = parseInt(amount);
-
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: paymentAmount, // smallest currency unit
-      currency,
-      automatic_payment_methods: { enabled: true },
-      metadata: {
-        userId: userId || "unknown",
-        movieId: movieId || "unknown",
-        theaterId: theaterId || "unknown",
-        showtimeId: showtimeId || "unknown",
-        seats: selectedSeats ? selectedSeats.join(",") : "",
-      },
+    console.log("💳 Creating payment intent for movie booking:", {
+      amount,
+      currency: currency || "inr",
+      userId,
+      movieId,
+      theaterId,
+      showtimeId,
+      selectedSeats,
     });
 
-    res.json({ clientSecret: paymentIntent.client_secret });
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: Math.round(amount), // Stripe expects amount in smallest currency unit (e.g. paise)
+      currency: currency || "inr",
+      metadata: {
+        userId: metadata?.userId || userId || "",
+        movieId: metadata?.movieId || movieId || "",
+        theaterId: metadata?.theaterId || theaterId || "",
+        showtimeId: metadata?.showtimeId || showtimeId || "",
+        selectedSeats:
+          metadata?.selectedSeats || selectedSeats?.join(", ") || "",
+        type: "movie_booking",
+        timestamp: new Date().toISOString(),
+      },
+      automatic_payment_methods: { enabled: true },
+    });
+
+    console.log("✅ Payment intent created:", paymentIntent.id);
+
+    res.json({
+      clientSecret: paymentIntent.client_secret,
+      paymentIntentId: paymentIntent.id,
+      amount: paymentIntent.amount,
+      currency: paymentIntent.currency,
+    });
   } catch (error) {
-    console.error("❌ Stripe error:", error);
-    res.status(500).json({ error: error.message });
+    console.error("❌ Error creating payment intent:", error.message);
+    res.status(500).json({
+      error: error.message,
+      details:
+        "Failed to create payment intent. Please check Stripe configuration.",
+    });
   }
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`✅ Server running on http://0.0.0.0:${PORT}`);
+// ✅ Default route
+app.get("/", (req, res) => {
+  res.send("🎬 Movie Ticket Stripe backend is running ✅");
 });
+
+// ✅ Start server
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

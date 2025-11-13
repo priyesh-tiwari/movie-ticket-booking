@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app_flutter/text.dart';
-import 'package:movie_app_flutter/description.dart';
+import 'package:movie_app_flutter/widget/description.dart';
 
 class TV extends StatelessWidget {
   final List tv;
@@ -28,13 +28,15 @@ class TV extends StatelessWidget {
               itemBuilder: (context, index) {
                 var tvShow = tv[index];
 
-                String imageUrl = tvShow['Poster'] != null && tvShow['Poster'] != 'N/A'
+                String imageUrl = tvShow['Poster'] != null &&
+                        tvShow['Poster'] != 'N/A'
                     ? tvShow['Poster']
                     : 'https://via.placeholder.com/150'; // Placeholder image
 
                 String title = tvShow['Title'] ?? 'Loading';
                 String imdbID = tvShow['imdbID'] ?? '';
-                String rating = (6 + (index % 4) * 0.8).toStringAsFixed(1); // Fake rating generator
+                String rating = (6 + (index % 4) * 0.8)
+                    .toStringAsFixed(1); // Fake rating generator
 
                 return GestureDetector(
                   onTap: () {
@@ -96,7 +98,8 @@ class TV extends StatelessWidget {
                           top: 8,
                           right: 8,
                           child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 4),
                             decoration: BoxDecoration(
                               color: Colors.amber.shade600,
                               borderRadius: BorderRadius.circular(12),
@@ -115,7 +118,10 @@ class TV extends StatelessWidget {
                                 SizedBox(width: 4),
                                 Text(
                                   rating,
-                                  style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),

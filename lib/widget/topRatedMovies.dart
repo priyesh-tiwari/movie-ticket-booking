@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+
+import '../text.dart';
 import 'description.dart';
-import 'text.dart';
 
 class TopRatedMovies extends StatelessWidget {
   final List toprated;
@@ -30,18 +31,21 @@ class TopRatedMovies extends StatelessWidget {
               itemBuilder: (context, index) {
                 var movie = toprated[index];
 
-                String imageUrl = movie['Poster'] != null && movie['Poster'] != 'N/A'
+                String imageUrl = movie['Poster'] != null &&
+                        movie['Poster'] != 'N/A'
                     ? movie['Poster']
                     : 'https://via.placeholder.com/150'; // Placeholder if image is null
 
-                String title = movie['Title'] ?? 'Loading'; // Default title fallback
+                String title =
+                    movie['Title'] ?? 'Loading'; // Default title fallback
 
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Description(imdbID: movie['imdbID'] ?? ''),
+                        builder: (context) =>
+                            Description(imdbID: movie['imdbID'] ?? ''),
                       ),
                     );
                   },
@@ -72,9 +76,11 @@ class TopRatedMovies extends StatelessWidget {
                             alignment: Alignment.bottomCenter,
                             child: Container(
                               width: double.infinity,
-                              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 8, horizontal: 5),
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.vertical(bottom: Radius.circular(12)),
+                                borderRadius: BorderRadius.vertical(
+                                    bottom: Radius.circular(12)),
                                 gradient: LinearGradient(
                                   begin: Alignment.bottomCenter,
                                   end: Alignment.topCenter,
@@ -88,7 +94,6 @@ class TopRatedMovies extends StatelessWidget {
                                 size: 15,
                                 text: title,
                                 color: Colors.white,
-
                               ),
                             ),
                           ),

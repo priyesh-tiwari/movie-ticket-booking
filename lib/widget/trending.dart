@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+
+import '../text.dart';
 import 'description.dart';
-import 'text.dart';
 
 class TrendingMovies extends StatefulWidget {
   final List trending;
@@ -35,18 +36,21 @@ class _TrendingMoviesState extends State<TrendingMovies> {
               itemBuilder: (context, index) {
                 var movie = widget.trending[index];
 
-                String imageUrl = movie['Poster'] != null && movie['Poster'] != 'N/A'
+                String imageUrl = movie['Poster'] != null &&
+                        movie['Poster'] != 'N/A'
                     ? movie['Poster']
                     : 'https://via.placeholder.com/150'; // Placeholder if image is null
 
-                String title = movie['Title'] ?? 'Loading'; // Default title fallback
+                String title =
+                    movie['Title'] ?? 'Loading'; // Default title fallback
 
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Description(imdbID: movie['imdbID'] ?? ''),
+                        builder: (context) =>
+                            Description(imdbID: movie['imdbID'] ?? ''),
                       ),
                     );
                   },
@@ -77,9 +81,11 @@ class _TrendingMoviesState extends State<TrendingMovies> {
                             alignment: Alignment.bottomCenter,
                             child: Container(
                               width: double.infinity,
-                              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 8, horizontal: 5),
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.vertical(bottom: Radius.circular(12)),
+                                borderRadius: BorderRadius.vertical(
+                                    bottom: Radius.circular(12)),
                                 gradient: LinearGradient(
                                   begin: Alignment.bottomCenter,
                                   end: Alignment.topCenter,
@@ -93,7 +99,6 @@ class _TrendingMoviesState extends State<TrendingMovies> {
                                 size: 15,
                                 text: title,
                                 color: Colors.white,
-
                               ),
                             ),
                           ),
