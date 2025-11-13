@@ -24,7 +24,7 @@ if (flutterVersionName == null) {
 
 android {
     namespace "com.example.movie_app"
-    compileSdk flutter.compileSdkVersion
+    compileSdk = 36
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -51,6 +51,8 @@ android {
 
     buildTypes {
         release {
+            minifyEnabled false
+            shrinkResources false
             signingConfig signingConfigs.debug
         }
     }
