@@ -60,30 +60,30 @@ A comprehensive Flutter application for movie ticket booking with role-based acc
 
 ### Home & Authentication
 <p align="center">
-  <img src="movie_search.jpeg" width="200" alt="Search Screen" />
-  <img src="movie_login.jpeg" width="200" alt="Login Screen" />
-  <img src="movie_signup.jpeg" width="200" alt="Sign Up Screen" />
-  <img src="movie_drawer.jpeg" width="200" alt="Drawer" />
+  <img src="screenshots/movie_search.jpeg" width="200" alt="Search Screen" />
+  <img src="screenshots/movie_login.jpeg" width="200" alt="Login Screen" />
+  <img src="screenshots/movie_signup.jpeg" width="200" alt="Sign Up Screen" />
+  <img src="screenshots/movie_drawer.jpeg" width="200" alt="Drawer" />
 </p>
 
 ### Movie Browsing & Selection
 <p align="center">
-  <img src="movie_description.jpeg" width="200" alt="Movie Details" />
-  <img src="movie_theatre_list.jpeg" width="200" alt="Theater Selection" />
-  <img src="movie_seats_grid.jpeg" width="200" alt="Seat Selection" />
+  <img src="screenshots/movie_description.jpeg" width="200" alt="Movie Details" />
+  <img src="screenshots/movie_theatre_list.jpeg" width="200" alt="Theater Selection" />
+  <img src="screenshots/movie_seats_grid.jpeg" width="200" alt="Seat Selection" />
 </p>
 
 ### Booking & Payment
 <p align="center">
-  <img src="movie_booking_history.jpeg" width="200" alt="Booking History" />
-  <img src="movie_payment.jpeg" width="200" alt="Stripe Payment" />
-  <img src="movie_booking_confirmed.jpeg" width="200" alt="Booking Confirmed" />
+  <img src="screenshots/movie_booking_history.jpeg" width="200" alt="Booking History" />
+  <img src="screenshots/movie_payment.jpeg" width="200" alt="Stripe Payment" />
+  <img src="screenshots/movie_booking_confirmed.jpeg" width="200" alt="Booking Confirmed" />
 </p>
 
 ### Admin Features
 <p align="center">
-  <img src="movie_admin_home.jpeg" width="200" alt="Admin Home" />
-  <img src="movie_add_movie.jpeg" width="200" alt="Add Movie" />
+  <img src="screenshots/movie_admin_home.jpeg" width="200" alt="Admin Home" />
+  <img src="screenshots/movie_add_movie.jpeg" width="200" alt="Add Movie" />
 </p>
 
 ## 🏗️ Key Technical Implementations
